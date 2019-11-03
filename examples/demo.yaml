@@ -1,0 +1,39 @@
+# name must be unique as it will use to mount volume
+name: demoWorkflow
+jobs:
+  clone:
+    runner: docker
+    failFast: true
+    async: false
+    payload:
+      image: node
+      commands:
+        - git clone https://github.com/arielhenryson/rxbox.git
+  job1:
+    runner: docker
+    failFast: true
+    async: true
+    payload:
+      image: node
+      commands:
+        - cd rxbox
+        - npm i
+#  job1:
+#    runner: docker
+#    failFast: true
+#    async: true
+#    payload:
+#      image: nginx
+#      commands:
+#        - while true; do echo 'job1 --> Hit CTRL+C'; sleep 1; done
+#  job2:
+#    runner: docker
+#    failFast: true
+#    async: false
+#    payload:
+#      image: alpine
+#      commands:
+#        -   apk add curl
+#        -   sleep 10
+#        -   curl job1.demoWorkflow
+#
